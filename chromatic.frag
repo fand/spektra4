@@ -9,7 +9,7 @@ void main() {
     int N = 20;
 
     // float d = (sin(time) * .5 + .5) * 0.005;
-    float d = slider * 0.005;
+    float d = slider * 0.001;
 
     for (int i = 0; i < N; i++) {
         float fi = float(i);
@@ -21,4 +21,7 @@ void main() {
     color.rgb /= float(N);
 
     fragColor = TDOutputSwizzle(color);
+
+    fragColor.rgb *= 1. - length(uv - .5) * slider * 2.;
+    fragColor.a = 1.;
 }
