@@ -12,7 +12,8 @@ void main() {
 
     // Add band noise
     float band = 1. - smoothstep(0.1, 0.12, mod(uv.y + time * 0.4, 1.));
-    uv.x += TDSimplexNoise(vec2(uv.y * 100., time * 20.)) * band * 0.03;
+    uv.x += TDSimplexNoise(vec2(uv.y * 300., time * 20.)) * band * 0.03;
+    uv.x = fract(uv.x);
 
     // Bleed
     float d = slider * 0.01;
@@ -20,9 +21,9 @@ void main() {
     vec3 bleed = vec3(0);
     for (int i = 0; i < N; i++) {
         float fi = float(i);
-        bleed.r += texture(sTD2DInputs[0], uv + d).r;
+        bleed.r += texture(sTD2DInputs[0], fract(uv + d)).r;
         bleed.g += texture(sTD2DInputs[0], uv).g;
-        bleed.b += texture(sTD2DInputs[0], uv - d).b;
+        bleed.b += texture(sTD2DInputs[0], fract(uv - d)).b;
     }
     bleed /= float(N);
     color.xyz = mix(color.xyz, bleed, 0.8);

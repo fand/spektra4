@@ -22,6 +22,6 @@ void main() {
 
     fragColor = TDOutputSwizzle(color);
 
-    fragColor.rgb *= 1. - length(uv - .5) * slider * 2.;
+    fragColor.rgb *= 1. - length(uv - .5) * slider;
     fragColor.a = 1.;
 }
