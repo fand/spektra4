@@ -31,6 +31,9 @@ void main() {
     // Grain
     color -= fract(TDSimplexNoise(vec3(uv * 1000., time))) * 0.2;
 
+    // Darken band
+    color -= band * .07;
+
     fragColor = TDOutputSwizzle(color);
 
     fragColor.rgb *= 1. - length(uv - .5) * slider;
